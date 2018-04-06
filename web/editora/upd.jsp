@@ -85,6 +85,15 @@ String classe = "";
                         <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome() %>" />
                     </div>
                    
+                    <div class="form-group">
+                        <label>CNPJ</label>
+                        <input class="form-control" type="text" name="txtCNPJ" required value="<%=obj.getCnpj() %>" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <input class="form-control" type="text" name="txtFoto" required value="<%=obj.getLogo() %>" />
+                    </div>
 
                 <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
                 

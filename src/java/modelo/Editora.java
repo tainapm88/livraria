@@ -6,15 +6,12 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -37,8 +34,9 @@ public class Editora implements Serializable {
     private String nome;
     @Column(name = "logo")
     private String logo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editora")
-    private List<Livro> livroList;
+    @Basic(optional = false)
+    @Column(name = "id")
+    private int id;
 
     public Editora() {
     }
@@ -47,9 +45,10 @@ public class Editora implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public Editora(String cnpj, String nome) {
+    public Editora(String cnpj, String nome, int id) {
         this.cnpj = cnpj;
         this.nome = nome;
+        this.id = id;
     }
 
     public String getCnpj() {
@@ -76,12 +75,12 @@ public class Editora implements Serializable {
         this.logo = logo;
     }
 
-    public List<Livro> getLivroList() {
-        return livroList;
+    public int getId() {
+        return id;
     }
 
-    public void setLivroList(List<Livro> livroList) {
-        this.livroList = livroList;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
