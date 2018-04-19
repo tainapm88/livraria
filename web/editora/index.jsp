@@ -87,7 +87,10 @@
                     <tr>
                         <td><%=item.getId()%></td>
                         <td><%=item.getNome() %></td>
-                         <td><%=item.getLogo()%></td>
+                         <td>
+                             <img src="../arquivos/<%=item.getLogo() %>"
+                                  width="40px" height="40px"/>
+                         </td>
                        
                         <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getId()%>">Excluir</button>  
