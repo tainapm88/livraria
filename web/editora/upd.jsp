@@ -15,6 +15,8 @@ String classe = "";
         //popular com oq ele digitou no form
         obj.setId(Integer.parseInt(request.getParameter("txtCodigo")));
         obj.setNome(request.getParameter("txtNome"));
+        obj.setCNPJ(Integer.parseInt(request.getParameter("txtCNPJ"));
+        obj.setLogo(request.getParameter("txtLogo"));
         
         
         Boolean resultado = dao.alterar(obj);
@@ -92,7 +94,7 @@ String classe = "";
                     
                     <div class="form-group">
                         <label>Foto</label>
-                        <input class="form-control" type="text" name="txtFoto" required value="<%=obj.getLogo() %>" />
+                        <input class="form-control" type="text" name="txtLogo" required value="<%=obj.getLogo() %>" />
                     </div>
 
                 <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
