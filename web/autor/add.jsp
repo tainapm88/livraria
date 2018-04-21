@@ -12,9 +12,13 @@
     AutorDAO dao = new AutorDAO();
     
     if (request.getParameter("txtNome") != null) {
-        
+        obj.setNome(request.getParameter("txtNome"));
+        obj.setNacionalidade(request.getParameter("txtNacionalidade"));
+        obj.setSexo(request.getParameter("txtSexo").charAt(0));
+        obj.setFoto(request.getParameter("txtFoto"));
 
         Boolean resultado = dao.incluir(obj);
+         dao.fecharConexao();
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
             classe = "alert-success";

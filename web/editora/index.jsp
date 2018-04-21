@@ -16,7 +16,7 @@
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            Editora obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Editora obj = dao.buscarPorChavePrimaria(request.getParameter("codigo"));
             if(obj != null){
                 dao.excluir(obj);
             }
@@ -72,28 +72,29 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Nome</th>
+                        
                         <th>CNPJ</th>
+                        <th>Nome</th>
                         <th>Foto</th>
                         
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(Editora item: lista)
+                    <%for(Editora item: lista) 
                     {
                     %>
                     <tr>
-                        <td><%=item.getId()%></td>
+                        
+                        <td><%=item.getCnpj() %></td>
                         <td><%=item.getNome() %></td>
                          <td>
                              <img src="../arquivos/<%=item.getLogo() %>"
                                   width="40px" height="40px"/>
                          </td>
                        
-                        <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
-                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getId()%>">Excluir</button>  
+                         <td><a href="upd.jsp?codigo=<%=item.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getCnpj()%>">Excluir</button>  
                         </td>
                     </tr>
                     <% } %>

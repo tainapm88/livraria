@@ -13,9 +13,12 @@
     
     if (request.getParameter("txtNome") != null) {
         obj.setNome(request.getParameter("txtNome"));
+        obj.setCnpj(request.getParameter("txtCNPJ"));
+        obj.setLogo(request.getParameter("txtLogo"));
         
 
         Boolean resultado = dao.incluir(obj);
+        dao.fecharConexao();
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
             classe = "alert-success";
@@ -54,7 +57,7 @@
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="UploadWS" method="post" enctype="multipart/form-data">
+            <form action="../UploadWS" method="post" enctype="multipart/form-data">
 
                 <div class="col-lg-6">
 
@@ -70,7 +73,7 @@
                     
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="txtFoto" required value="<%=obj.getLogo() %>" />
+                        <input type="file" name="txtFoto" required />
                     </div>
                    
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
