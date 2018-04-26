@@ -50,7 +50,7 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Autors
+            Autores
         </div>
         <div class="panel-body">
 

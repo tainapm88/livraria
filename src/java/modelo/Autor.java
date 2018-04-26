@@ -8,15 +8,16 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -35,32 +36,23 @@ public class Autor implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "nome")
-    private String nome;
-    @Basic(optional = false)
-    @Column(name = "nacionalidade")
-    private String nacionalidade;
-    @Basic(optional = false)
-    @Column(name = "sexo")
-    private Character sexo;
     @Column(name = "foto")
     private String foto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "autor")
-    private List<AutorLivro> autorLivroList;
+    @Column(name = "nacionalidade")
+    private String nacionalidade;
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "sexo")
+    private Character sexo;
+    
+    @ManyToMany(mappedBy = "autorList")
+    private List<Livro> livroList;
 
     public Autor() {
     }
 
     public Autor(Integer id) {
         this.id = id;
-    }
-
-    public Autor(Integer id, String nome, String nacionalidade, Character sexo) {
-        this.id = id;
-        this.nome = nome;
-        this.nacionalidade = nacionalidade;
-        this.sexo = sexo;
     }
 
     public Integer getId() {
@@ -71,12 +63,12 @@ public class Autor implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getNacionalidade() {
@@ -87,6 +79,14 @@ public class Autor implements Serializable {
         this.nacionalidade = nacionalidade;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public Character getSexo() {
         return sexo;
     }
@@ -95,20 +95,12 @@ public class Autor implements Serializable {
         this.sexo = sexo;
     }
 
-    public String getFoto() {
-        return foto;
+    public List<Livro> getLivroList() {
+        return livroList;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public List<AutorLivro> getAutorLivroList() {
-        return autorLivroList;
-    }
-
-    public void setAutorLivroList(List<AutorLivro> autorLivroList) {
-        this.autorLivroList = autorLivroList;
+    public void setLivroList(List<Livro> livroList) {
+        this.livroList = livroList;
     }
 
     @Override

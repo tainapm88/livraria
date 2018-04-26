@@ -6,12 +6,14 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +26,11 @@ import javax.persistence.Table;
     @NamedQuery(name = "Editora.findAll", query = "SELECT e FROM Editora e")})
 public class Editora implements Serializable {
 
+    @Column(name = "id")
+    private Integer id;
+    @OneToMany(mappedBy = "editora")
+    private List<Livro> livroList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -34,9 +41,6 @@ public class Editora implements Serializable {
     private String nome;
     @Column(name = "logo")
     private String logo;
-    @Basic(optional = false)
-    @Column(name = "id")
-    private int id;
 
     public Editora() {
     }
@@ -75,13 +79,6 @@ public class Editora implements Serializable {
         this.logo = logo;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {
@@ -106,6 +103,22 @@ public class Editora implements Serializable {
     @Override
     public String toString() {
         return "modelo.Editora[ cnpj=" + cnpj + " ]";
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Livro> getLivroList() {
+        return livroList;
+    }
+
+    public void setLivroList(List<Livro> livroList) {
+        this.livroList = livroList;
     }
     
 }
