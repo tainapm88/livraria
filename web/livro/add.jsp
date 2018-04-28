@@ -109,7 +109,7 @@
                         <label>Autores com checkbox</label>
                        
                             <%for(Autor item:alistar){%>
-                            <input type="checkbox" name="autoreschk" value="<%=item.getId()%>"><%=item.getNome()%>
+                            <input type="checkbox" name="autores" value="<%=item.getId()%>"><%=item.getNome()%>
                            
                             <%}%>
                         </select>
