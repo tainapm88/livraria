@@ -1,47 +1,77 @@
-
-<%@page import="dao.LivroDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Autor"%>
-<%@page import="java.util.Date"%>
-<%@page import="modelo.Livro"%>
-<%@page import="modelo.Autor"%>
 <%@page import="dao.AutorDAO"%>
-<%@page import="java.math.BigDecimal"%>
-
+<%@page import="dao.EditoraDAO"%>
+<%@page import="modelo.Editora"%>
+<%@page import="dao.CategoriaDAO"%>
+<%@page import="dao.CategoriaDAO"%>
+<%@page import="modelo.Categoria"%>
+<%@page import="util.StormData"%>
+'<%@page import="java.math.BigDecimal"%>
+<%@page import="dao. LivroDAO"%>
+<%@page import="modelo. Livro"%>
 <%@page import="java.util.List"%>
 
 <%@include file="../cabecalho.jsp" %>
 <%
     String msg = "";
     String classe = "";
-    AutorDAO adao = new AutorDAO();
+    
+     Livro obj = new  Livro();
+     LivroDAO dao = new  LivroDAO();
+  
+     CategoriaDAO cdao = new CategoriaDAO();
+     List<Categoria> clistar = cdao.listar();
+     Categoria c = new Categoria();
+     
+     EditoraDAO edao = new EditoraDAO();
+     List<Editora> elistar = edao.listar();
+     Editora e = new Editora();
+     
+     AutorDAO adao = new AutorDAO();
+     List<Autor> alistar = adao.listar();
+     
+    
+     
     if(request.getMethod().equals("POST")){
         //pego uma lista de autores(com mesmo name)
-        String[] autoresid = request.getParameterValues("autores");
+        String[] autoresid = request.getParameter("autores").split(";");
         //popular o livro
-        Livro l = new Livro();
-        l.setNome("StorTroopers - Uma viagem que nao sai");
-        l.setDatapublicacao(new Date());
-        l.setPreco(13.12f);
-        //Autores
-        List<Autor> listaautores = new ArrayList<>();
-        for (String id : autoresid) {
-            Integer idinteger = Integer.parseInt(id);
-            listaautores.add(adao.buscarPorChavePrimaria(idinteger));
-         }
-        l.setAutorList(listaautores);
-        
-        LivroDAO dao = new LivroDAO();
-        dao.incluir(l);
-        
-        
+        if (request.getParameter("txtNome") != null && request.getParameter("txtPreco") != null && request.getParameter("txtData") != null && request.getParameter("txtCategoria") != null && request.getParameter("txtEditora") != null) 
+        {
+            obj.setNome(request.getParameter("txtNome"));
+            obj.setPreco(Double.parseDouble(request.getParameter("txtPreco")));
+            obj.setDatapublicacao(StormData.formata(request.getParameter("txtData")));
+            obj.setSinopse(request.getParameter("txtSinopse"));
+            c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
+            e.setCnpj(request.getParameter("txtEditora"));
+            obj.setCategoria(c);
+            obj.setEditora(e);
+            obj.setImagem1(request.getParameter("txtFoto"));
+            obj.setImagem2(request.getParameter("txtFoto2"));
+            obj.setImagem3(request.getParameter("txtFoto3"));
+            
+            List<Autor> listaautores = new ArrayList<>();
+            for (String id : autoresid) {
+                Integer idinteger = Integer.parseInt(id);
+                listaautores.add(adao.buscarPorChavePrimaria(idinteger));
+            }
+            obj.setAutorList(listaautores);
+            Boolean resultado = dao.incluir(obj);
+            if (resultado) {
+                msg = "Registro cadastrado com sucesso";
+                classe = "alert-success";
+            } else {
+                msg = "Não foi possível cadastrar";
+                classe = "alert-danger";
+            }
+        }
     }
+     
+     
+     
+    dao.fecharConexao();
     
-    
-
-    //pego meus autores
-    
-    List<Autor> autores = adao.listar();
 
 %>
 <div class="row">
@@ -64,37 +94,85 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Categorias
+             Livros
         </div>
         <div class="panel-body">
 
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
+            <form action="../UploadWS" method="post" enctype="multipart/form-data">
 
                 <div class="col-lg-6">
-
+                    
                     <div class="form-group">
-                        <label>Autores</label>
-                        <select name="autores" multiple>
-                            <%for(Autor a:autores){%>
-                            <option value="<%=a.getId()%>"><%=a.getNome()%>
-                            </option>
-                            <%}%>
-                        </select>
-                     </div>
-                        
-                        <div class="form-group">
                         <label>Autores com checkbox</label>
                        
-                            <%for(Autor a:autores){%>
-                            <input type="checkbox" name="autoreschk" value="<%=a.getId()%>"><%=a.getNome()%>
+                            <%for(Autor item:alistar){%>
+                            <input type="checkbox" name="autoreschk" value="<%=item.getId()%>"><%=item.getNome()%>
                            
                             <%}%>
                         </select>
                      </div>
 
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input class="form-control" type="text"  name="txtNome"  required />
+                    </div>
+                    <div class="form-group">
+                        <label>Preco: </label>
+                        <input class="form-control" type="text"  name="txtPreco"  required />
+                    </div>
+                    <div class="form-group">
+                        <label>Data de Publicação: </label>
+                        <input class="form-control" type="text"  name="txtData"  required />
+                    </div>
+                    <div class="form-group">
+                        <label>Sinopse: </label>
+                        <input class="form-control" type="text"  name="txtSinopse"  required />
+                    </div>
+                    <div class="form-group">
+                        <label> Categoria: </label>
+                        <select name="txtCategoria"  required />
+                        <%
+                           for (Categoria item : clistar) {
+                               
+                         %>
+                         <option value = "<%=item.getId()%>">
+                             <%=item.getNome()%>
+                         </option>
+                         <%
+                             }
+                         %>
+                        </select>
+                    </div>
+                             <div class="form-group">
+                        <label> Editora: </label>
+                        <select name="txtEditora"  required />
+                        <%
+                           for (Editora item : elistar) {
+                               
+                         %>
+                         <option value = "<%=item.getCnpj()%>">
+                             <%=item.getNome()%>
+                         </option>
+                         <%
+                             }
+                         %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Foto: </label>
+                        <input class="form-control" type="file"  name="txtFoto"  required />
+                    </div>
+                    <div class="form-group">
+                        <label>Foto 2: </label>
+                        <input class="form-control" type="file"  name="txtFoto2"  required />
+                    </div>
+                    <div class="form-group">
+                        <label>Foto 3: </label>
+                        <input class="form-control" type="file"  name="txtFoto3"  required />
+                    </div>
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 
             </form>

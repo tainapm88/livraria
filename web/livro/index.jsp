@@ -1,13 +1,12 @@
-
 <%@page import="java.util.List"%>
-<%@page import="modelo.Autor"%>
-<%@page import="dao.AutorDAO"%>
+<%@page import="modelo.Livro"%>
+<%@page import="dao.LivroDAO"%>
 <%@include file="../cabecalho.jsp" %>
 
 <% 
     
-    AutorDAO dao = new AutorDAO();
-    List<Autor> lista;
+    LivroDAO dao = new LivroDAO();
+    List<Livro> lista;
     
     if (request.getParameter("txtFiltro") != null) {
         lista = dao.listar(request.getParameter("txtFiltro"));
@@ -15,8 +14,8 @@
     } else{ 
    
     //verifico se é excluir
-        if(request.getParameter("codigo") != null){
-            Autor obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+    if(request.getParameter("codigo") != null){
+            Livro obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
             if(obj != null){
                 dao.excluir(obj);
             }
@@ -32,7 +31,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Gerenciamento de Autores
+            Gerenciamento de Livros
 
         </h1>
         <ol class="breadcrumb">
@@ -72,28 +71,34 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Código</th>
+                        <th >Id</th>
                         <th>Nome</th>
-                        <th>Nacionalidade</th>
-                        <th>Sexo</th>
-                        <th>Foto</th>
-                        
-                        <th>Ações</th>
+                        <th >Preço</th>
+                        <th >Editora</th>
+                        <th >Data de Publicação</th>
+                        <th >Categoria</th>
+                        <th >Sinopse</th>
+                        <th >Foto</th>
+                        <th >Foto 2</th>
+                        <th >Foto 3</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(Autor item: lista)
+                    <%for(Livro item: lista)
                     {
                     %>
                     <tr>
                         <td><%=item.getId()%></td>
                         <td><%=item.getNome() %></td>
-                         <td><%=item.getNacionalidade()%></td>
-                         <td><%=item.getSexo()%></td>
-                         <td><%=item.getFoto()%></td>
-                        
-                       
-                        <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                        <td><%=item.getPreco()%></td>
+                        <td><%=item.getEditora()%></td>
+                        <td><%=item.getDataPublicacao()%></td>
+                        <td><%=item.getCategoria()%></td>
+                        <td><%=item.getEditora()%></td>
+                        <td><img src = "../arquivos/<%=item.getImagem1()%>" width="100" height = "80" /></td>
+                        <td><img src = "../arquivos/<%=item.getImagem2()%>" width="100" height = "80" /></td>
+                        <td><img src = "../arquivos/<%=item.getImagem3()%>" width="100" height = "80" /></td>
+                        <td><a href="upd.jsp?Id=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getId()%>">Excluir</button>  
                         </td>
                     </tr>

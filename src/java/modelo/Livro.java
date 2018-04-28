@@ -50,7 +50,7 @@ public class Livro implements Serializable {
     private String imagem2;
     @Lob
     @Column(name = "imagem3")
-    private byte[] imagem3;
+    private String imagem3;
     @Column(name = "nome")
     private String nome;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -109,11 +109,11 @@ public class Livro implements Serializable {
         this.imagem2 = imagem2;
     }
 
-    public byte[] getImagem3() {
+    public String getImagem3() {
         return imagem3;
     }
 
-    public void setImagem3(byte[] imagem3) {
+    public void setImagem3(String imagem3) {
         this.imagem3 = imagem3;
     }
 

@@ -1,4 +1,12 @@
 
+<%@page import="modelo.Editora"%>
+<%@page import="dao.EditoraDAO"%>
+<%@page import="modelo.Categoria"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.CategoriaDAO"%>
+<%@page import="dao.LivroDAO"%>
+<%@page import="modelo.Livro"%>
+<%@page import="util.StormData"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="modelo.Autor"%>
 <%@page import="dao.AutorDAO"%>
@@ -9,17 +17,34 @@ String classe = "";
     
     AutorDAO dao = new AutorDAO();
     Autor obj = new Autor();
+    
+    Livro obj = new  Livro();
+     LivroDAO dao = new  LivroDAO();
+  
+     CategoriaDAO cdao = new CategoriaDAO();
+     List<Categoria> clistar = cdao.listar();
+     Categoria c = new Categoria();
+     
+     EditoraDAO edao = new EditoraDAO();
+     List<Editora> elistar = edao.listar();
+     Editora e = new Editora();
     //verifica se é postm ou seja, quer alterar
     if(request.getMethod().equals("POST")){
         
         //popular com oq ele digitou no form
         obj.setId(Integer.parseInt(request.getParameter("txtCodigo")));
         obj.setNome(request.getParameter("txtNome"));
-        obj.setNacionalidade(request.getParameter("txtNacionalidade"));
         obj.setSexo(request.getParameter("txtSexo").charAt(0));
-        obj.setFoto(request.getParameter("txtFoto"));
-        
-        
+        obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
+        obj.setDatapublicacao(StormData.formata(request.getParameter("txtData")));
+        obj.setSinopse(request.getParameter("txtSinopse"));
+        c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
+        e.setCnpj(request.getParameter("txtEditora"));
+            obj.setCategoria(c);
+            obj.setEditora(e);
+            obj.setFoto1(request.getParameter("txtFoto"));
+            obj.setFoto2(request.getParameter("txtFoto2"));
+            obj.setFoto3(request.getParameter("txtFoto3"));
         
         
         Boolean resultado = dao.alterar(obj);
