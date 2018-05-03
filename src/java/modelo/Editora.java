@@ -23,7 +23,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "editora")
 @NamedQueries({
-    @NamedQuery(name = "Editora.findAll", query = "SELECT e FROM Editora e")})
+    @NamedQuery(name = "Editora.findAll", query = "SELECT e FROM Editora e"),
+    @NamedQuery(name = "Editora.findFilter", query = "SELECT e FROM Editora e"
+    + " WHERE e.nome like :filtro")})
 public class Editora implements Serializable {
 
     @Column(name = "id")

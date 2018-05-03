@@ -91,10 +91,10 @@
                         <td><%=item.getId()%></td>
                         <td><%=item.getNome() %></td>
                         <td><%=item.getPreco()%></td>
-                        <td><%=item.getEditora()%></td>
-                        <td><%=item.getDataPublicacao()%></td>
-                        <td><%=item.getCategoria()%></td>
-                        <td><%=item.getEditora()%></td>
+                        <td><%=item.getEditora().getNome()%></td>
+                        <td><%=item.getDatapublicacao()%></td>
+                        <td><%=item.getCategoria().getNome()%></td>
+                        <td><%=item.getSinopse()%></td>
                         <td><img src = "../arquivos/<%=item.getImagem1()%>" width="100" height = "80" /></td>
                         <td><img src = "../arquivos/<%=item.getImagem2()%>" width="100" height = "80" /></td>
                         <td><img src = "../arquivos/<%=item.getImagem3()%>" width="100" height = "80" /></td>

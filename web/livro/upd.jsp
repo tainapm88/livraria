@@ -15,10 +15,10 @@
 String msg ="";
 String classe = "";
     
-    AutorDAO dao = new AutorDAO();
-    Autor obj = new Autor();
+    AutorDAO daoa = new AutorDAO();
+    Autor obja = new Autor();
     
-    Livro obj = new  Livro();
+     Livro obj = new  Livro();
      LivroDAO dao = new  LivroDAO();
   
      CategoriaDAO cdao = new CategoriaDAO();
@@ -34,17 +34,16 @@ String classe = "";
         //popular com oq ele digitou no form
         obj.setId(Integer.parseInt(request.getParameter("txtCodigo")));
         obj.setNome(request.getParameter("txtNome"));
-        obj.setSexo(request.getParameter("txtSexo").charAt(0));
-        obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
         obj.setDatapublicacao(StormData.formata(request.getParameter("txtData")));
+        obj.setPreco(Double.parseDouble(request.getParameter("txtPreco")));
         obj.setSinopse(request.getParameter("txtSinopse"));
         c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
         e.setCnpj(request.getParameter("txtEditora"));
             obj.setCategoria(c);
             obj.setEditora(e);
-            obj.setFoto1(request.getParameter("txtFoto"));
-            obj.setFoto2(request.getParameter("txtFoto2"));
-            obj.setFoto3(request.getParameter("txtFoto3"));
+            obj.setImagem1(request.getParameter("txtFoto"));
+            obj.setImagem2(request.getParameter("txtFoto2"));
+            obj.setImagem3(request.getParameter("txtFoto3"));
         
         
         Boolean resultado = dao.alterar(obj);
@@ -65,7 +64,7 @@ String classe = "";
             return;
         }
         
-        dao = new AutorDAO();
+        
         obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
         
         if(obj == null){
@@ -116,24 +115,34 @@ String classe = "";
                     </div>
                    
                     <div class="form-group">
-                        <label>Nacionalidade</label>
-                        <input class="form-control" type="text" name="txtCNPJ" required value="<%=obj.getNacionalidade() %>" />
+                        <label>Preço</label>
+                        <input class="form-control" type="text" name="txtPreco" required value="<%=obj.getPreco() %>" />
                     </div>
                     
                     <div class="form-group">
-                        <label>Sexo</label>
-                        <select class="form-control" type="text" name="txtSexo" required >
-                                <option value="M">Masculino</option>
-                                <option value="F">Feminino</option>
-                        </select>
-                                
+                        <label>Data de publicação</label>
+                        <input class="form-control" type="text" name="txtData" required value="<%=obj.getDatapublicacao() %>" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Sinopse</label>
+                        <input class="form-control" type="text" name="txtSinopse" required value="<%=obj.getSinopse() %>" />
                     </div>
                     
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="txtFoto" required value="<%=obj.getFoto() %>" />
+                        <input type="file" name="txtFoto" required value="<%=obj.getImagem1() %>" />
                     </div>
-
+                    
+                    <div class="form-group">
+                        <label>Foto 2</label>
+                        <input type="file" name="txtFoto2" required value="<%=obj.getImagem2() %>" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Foto 3</label>
+                        <input type="file" name="txtFoto2" required value="<%=obj.getImagem3() %>" />
+                    </div>
                 <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
                 
             </form>

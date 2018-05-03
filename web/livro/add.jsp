@@ -104,16 +104,6 @@
             <form action="../UploadWS" method="post" enctype="multipart/form-data">
 
                 <div class="col-lg-6">
-                    
-                    <div class="form-group">
-                        <label>Autores com checkbox</label>
-                       
-                            <%for(Autor item:alistar){%>
-                            <input type="checkbox" name="autores" value="<%=item.getId()%>"><%=item.getNome()%>
-                           
-                            <%}%>
-                        </select>
-                     </div>
 
                     <div class="form-group">
                         <label>Nome</label>
@@ -161,6 +151,15 @@
                          %>
                         </select>
                     </div>
+                        <div class="form-group">
+                        <label>Autores com checkbox</label>
+                       
+                            <%for(Autor item:alistar){%>
+                            <input type="checkbox" name="autores" value="<%=item.getId()%>"><%=item.getNome()%>
+                           
+                            <%}%>
+                        </select>
+                     </div>
                     <div class="form-group">
                         <label>Foto: </label>
                         <input class="form-control" type="file"  name="txtFoto"  required />
