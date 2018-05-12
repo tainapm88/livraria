@@ -73,7 +73,7 @@
                     
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="txtFoto" required value="<%=obj.getLogo() %>" />
+                        <input type="file" name="txtLogo" required value="<%=obj.getLogo() %>" />
                     </div>
                    
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>

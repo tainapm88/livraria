@@ -76,9 +76,9 @@ String classe = "";
                 
                 <div class="col-lg-6">
 
-                    <div class="form-group">
-                        <label>Código</label>
-                        <input class="form-control" type="text" name="txtCodigo" readonly value="<%=obj.getId()%>"/>
+                     <div class="form-group">
+                        <label>CNPJ</label>
+                        <input class="form-control" type="text" name="txtCNPJ" readonly value="<%=obj.getCnpj() %>" />
                     </div>
                     
                     <div class="form-group">
@@ -86,14 +86,10 @@ String classe = "";
                         <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome() %>" />
                     </div>
                    
-                    <div class="form-group">
-                        <label>CNPJ</label>
-                        <input class="form-control" type="text" name="txtCNPJ" required value="<%=obj.getCnpj() %>" />
-                    </div>
                     
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="txtFoto" required value="<%=obj.getLogo()%>" />
+                        <input type="file" name="txtLogo" required value="<%=obj.getLogo()%>" />
                     </div>
                 <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
                 
