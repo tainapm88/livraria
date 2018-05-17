@@ -188,7 +188,7 @@
                             }
                         
                         %>
-                        <input type="checkbox" name="autoreschk" <%=selecionado%> value<%=a.getId()%>
+                        <input type="checkbox" name="autoreschk" <%=selecionado%> value="<%=a.getId()%>"><%=a.getNome()%>
 
                         <%}%>
                     </div>
