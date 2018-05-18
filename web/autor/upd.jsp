@@ -117,6 +117,7 @@ String classe = "";
                         <input type="file" name="txtFoto" required value="<%=obj.getFoto() %>" />
                         <input type="hidden" name="txtFotoVelha"
                                value="<%=obj.getFoto()%>" />
+                        <td><img src="../arquivos/<%=obj.getFoto()%>" id="img" width="100" height="80"/></td>
                     </div>
 
                 <button class="btn btn-primary btn-sm" type="submit">Salvar</button>

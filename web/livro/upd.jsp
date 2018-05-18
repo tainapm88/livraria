@@ -1,5 +1,7 @@
 
 
+<%@page import="util.StormData"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Livro"%>
 <%@page import="dao.LivroDAO"%>
 <%@page import="dao.EditoraDAO"%>
@@ -14,18 +16,65 @@
 <%
     String msg = "";
     String classe = "";
-    LivroDAO dao = new LivroDAO();
+    /*LivroDAO dao = new LivroDAO();
     CategoriaDAO cdao = new CategoriaDAO();
     AutorDAO adao = new AutorDAO();
     EditoraDAO edao = new EditoraDAO();
     
     
-    Livro obj = new Livro();
+    Livro obj = new Livro();*/
+    
+    Livro obj = new  Livro();
+     LivroDAO dao = new  LivroDAO();
+  
+     CategoriaDAO cdao = new CategoriaDAO();
+     List<Categoria> clistar = cdao.listar();
+     Categoria c = new Categoria();
+     
+     EditoraDAO edao = new EditoraDAO();
+     List<Editora> elistar = edao.listar();
+     Editora e = new Editora();
+     
+     AutorDAO adao = new AutorDAO();
+     List<Autor> alistar = adao.listar();
 
     
     //verifica se é postm ou seja, quer alterar
     if (request.getMethod().equals("POST")) {
-      
+      String[] autoresid = request.getParameter("autoreschk").split(";");
+        //popular o livro
+        if (request.getParameter("txtNome") != null &&
+                request.getParameter("txtPreco") != null && 
+                request.getParameter("txtData") != null && request.getParameter("txtCategoria") != null &&
+                request.getParameter("txtEditora") != null) 
+        {
+            obj.setNome(request.getParameter("txtNome"));
+            obj.setPreco(Double.parseDouble(request.getParameter("txtPreco")));
+            obj.setDatapublicacao(StormData.formata(request.getParameter("txtData")));
+            obj.setSinopse(request.getParameter("txtSinopse"));
+            c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
+            e.setCnpj(request.getParameter("txtEditora"));
+            obj.setCategoria(c);
+            obj.setEditora(e);
+            obj.setImagem1(request.getParameter("txtFoto"));
+            obj.setImagem2(request.getParameter("txtFoto2"));
+            obj.setImagem3(request.getParameter("txtFoto3"));
+            
+            List<Autor> listaautores = new ArrayList<>();
+            for (String id : autoresid) {
+                Integer idinteger = Integer.parseInt(id);
+                listaautores.add(adao.buscarPorChavePrimaria(idinteger));
+            }
+            obj.setAutorList(listaautores);
+            Boolean resultado = dao.alterar(obj);
+            if (resultado) {
+                msg = "Registro cadastrado com sucesso";
+                classe = "alert-success";
+            } else {
+                msg = "Não foi possível cadastrar";
+                classe = "alert-danger";
+            }
+        }
 
     } else {
         //e GET
@@ -101,28 +150,28 @@
 
                     <div class="form-group">
                         <label>Data Publicação</label>
-                        <input class="form-control" type="text"  name="txtDataPublicacao"  required />
+                        <input class="form-control" type="text"  name="txtData"  required />
                     </div>
 
                     <div class="form-group">
                         <label>Categoria</label>
-                        <select name="selCategoria" class="form-control">
+                        <select name="txtCategoria" class="form-control">
                             <option>Selecione</option>
                         <%
                          String selecionado;
-                         for(Categoria c:categorias){
+                         for(Categoria c1:categorias){
                              
-                            if(obj.getCategoria().getId()==c.getId()){
+                            if(obj.getCategoria().getId()==c1.getId()){
                                 selecionado="selected";
                             }
                             else{
                                 selecionado="";
                             }
                         %>
-                        <option value="<%=c.getId()%>" <%=selecionado%>>
+                        <option value="<%=c1.getId()%>" <%=selecionado%>>
                             
                             
-                        <%=c.getNome()%>
+                        <%=c1.getNome()%>
                         </option>
                         <%}%>
                         </select>
@@ -130,7 +179,7 @@
 
                     <div class="form-group">
                         <label>Editora</label>
-                        <select name="selEditora" class="form-control">
+                        <select name="txtEditora" class="form-control">
                             <option>Selecione</option>
                         <%
                        
@@ -155,6 +204,8 @@
                    <div class="form-group">
                         <label>Image1</label>
                         <input class="form-control" type="file" name="arquivo1" id="arquivo1"  accept="image/*" />
+                        <input type="hidden" name="txtFotoVelha"
+                               value="<%=obj.getImagem1()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem1()%>" id="img1" width="100" height="80"/></td>
                         
                     </div>
@@ -162,12 +213,16 @@
                     <div class="form-group">
                         <label>Imagem 2</label>
                         <input class="form-control" type="file" name="arquivo2" id="arquivo2"  accept="image/*" />
+                        <input type="hidden" name="txtFotoVelha"
+                               value="<%=obj.getImagem2()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem2()%>" id="img2" width="100" height="80"/></td>
                     </div>
 
                     <div class="form-group">
                         <label>Imagem 3</label>
                         <input class="form-control" type="file" name="arquivo3" id="arquivo3"  accept="image/*" />
+                        <input type="hidden" name="txtFotoVelha"
+                               value="<%=obj.getImagem3()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem3()%>" id="img3" width="100" height="80"/></td>
                     </div>
 
