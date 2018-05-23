@@ -56,9 +56,41 @@
             e.setCnpj(request.getParameter("txtEditora"));
             obj.setCategoria(c);
             obj.setEditora(e);
-            obj.setImagem1(request.getParameter("txtFoto"));
+            if(request.getParameter("txtFoto")!=null)
+            {
+                obj.setImagem1(request.getParameter("txtFoto"));
+            }
+            else
+            {
+                obj.setImagem1(request.getParameter("txtFotoVelha"));
+            }
+            
+            
+            
+            
+               if(request.getParameter("txtFoto2")!=null)
+            {
+                obj.setImagem2(request.getParameter("txtFoto2"));
+            }
+            else
+            {
+                obj.setImagem2(request.getParameter("txtFotoVelha2"));
+            }
+               
+               
+               
+                  
+               if(request.getParameter("txtFoto3")!=null)
+            {
+                obj.setImagem3(request.getParameter("txtFoto3"));
+            }
+            else
+            {
+                obj.setImagem3(request.getParameter("txtFotoVelha3"));
+            }
+            /*obj.setImagem1(request.getParameter("txtFoto"));
             obj.setImagem2(request.getParameter("txtFoto2"));
-            obj.setImagem3(request.getParameter("txtFoto3"));
+            obj.setImagem3(request.getParameter("txtFoto3"));*/
             
             List<Autor> listaautores = new ArrayList<>();
             for (String id : autoresid) {
@@ -134,23 +166,23 @@
 
                     <div class="form-group">
                         <label>Nome</label>
-                        <input class="form-control" type="text"  name="txtNome"  required />
+                        <input class="form-control" type="text"  name="txtNome"  required value ="<%=obj.getNome()%>" />
                     </div>
 
                     <div class="form-group">
                         <label>Preço</label>
-                        <input class="form-control" type="text"  name="txtPreco"  required />
+                        <input class="form-control" type="text"  name="txtPreco"  required value ="<%=obj.getPreco()%>" />
                     </div>
                     <div class="form-group">
                         <label>Sinopse</label>
                         
-                        <TextArea name="txtSinopse"></TextArea>
+                        <TextArea class="form-control" name="txtSinopse" required><%=obj.getSinopse()%> </TextArea>
                         </textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Data Publicação</label>
-                        <input class="form-control" type="text"  name="txtData"  required />
+                        <input class="form-control" type="text"  name="txtData"  required value="<%=StormData.formata(obj.getDatapublicacao())%>" />
                     </div>
 
                     <div class="form-group">
@@ -213,7 +245,7 @@
                     <div class="form-group">
                         <label>Imagem 2</label>
                         <input class="form-control" type="file" name="txtFoto2" id="arquivo2"  accept="image/*" />
-                        <input type="hidden" name="txtFotoVelha"
+                        <input type="hidden" name="txtFotoVelha2"
                                value="<%=obj.getImagem2()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem2()%>" id="img2" width="100" height="80"/></td>
                     </div>
@@ -221,7 +253,7 @@
                     <div class="form-group">
                         <label>Imagem 3</label>
                         <input class="form-control" type="file" name="txtFoto3" id="arquivo3"  accept="image/*" />
-                        <input type="hidden" name="txtFotoVelha"
+                        <input type="hidden" name="txtFotoVelha3"
                                value="<%=obj.getImagem3()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem3()%>" id="img3" width="100" height="80"/></td>
                     </div>
