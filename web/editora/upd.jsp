@@ -96,7 +96,7 @@ String classe = "";
                     
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="txtLogo" required value="<%=obj.getLogo()%>" />
+                        <input type="file" name="txtLogo" value="<%=obj.getLogo()%>" />
                         <td><img src="../arquivos/<%=obj.getLogo()%>" id="img" width="100" height="80"/></td>
                         <input type="hidden" name="txtFotoVelha"
                                value="<%=obj.getLogo() %>" />
