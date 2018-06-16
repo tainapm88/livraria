@@ -1,5 +1,20 @@
+<%@page import="modelo.Livro"%>
+<%@page import="dao.LivroDAO"%>
+<%@page import="modelo.Categoria"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.CategoriaDAO"%>
 <!DOCTYPE html>
 <html lang="en">
+    
+    <%
+    CategoriaDAO daoc = new CategoriaDAO();
+    List<Categoria> lista1 = daoc.listar();
+    daoc.fecharConexao();
+    
+    LivroDAO daol = new LivroDAO();
+    List<Livro> listal = daol.listar();
+    daoc.fecharConexao();
+    %>
 
 <head>
     <meta charset="UTF-8">
@@ -32,65 +47,39 @@
         <!--  Side Nav  -->
         <div class="nav-side-menu">
             <div class="menu-list">
-                <h6>Categories</h6>
+                <h6>Categorias</h6>
                 <ul id="menu-content" class="menu-content collapse out">
+                    <!--  Side Nav  -->
+                <div class="nav-side-menu">
+                    <div class="menu-list">
+                
+                <ul id="menu-content" class="menu-content collapse out">
+                    <%
+                    for(Categoria item : lista1){
+                        
+                    
+                    %>
                     <!-- Single Item -->
                     <li data-toggle="collapse" data-target="#women" class="collapsed active">
-                        <a href="#">Woman wear <span class="arrow"></span></a>
+                        <a href="#"><%=item.getNome()%><span class="arrow"></span></a>
                         <ul class="sub-menu collapse" id="women">
+                             <%
+                    for(Livro item1 : listal){
+                        
+                    
+                    %>
                             <li><a href="#">Midi Dresses</a></li>
                             <li><a href="#">Maxi Dresses</a></li>
                             <li><a href="#">Prom Dresses</a></li>
                             <li><a href="#">Little Black Dresses</a></li>
-                            <li><a href="#">Mini Dresses</a></li>
+                            <li><a href="#">Mini Dresses</a></li><%}%>
                         </ul>
                     </li>
-                    <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#man" class="collapsed">
-                        <a href="#">Man Wear <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="man">
-                            <li><a href="#">Man Dresses</a></li>
-                            <li><a href="#">Man Black Dresses</a></li>
-                            <li><a href="#">Man Mini Dresses</a></li>
-                        </ul>
-                    </li>
-                    <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#kids" class="collapsed">
-                        <a href="#">Children <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="kids">
-                            <li><a href="#">Children Dresses</a></li>
-                            <li><a href="#">Mini Dresses</a></li>
-                        </ul>
-                    </li>
-                    <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#bags" class="collapsed">
-                        <a href="#">Bags &amp; Purses <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="bags">
-                            <li><a href="#">Bags</a></li>
-                            <li><a href="#">Purses</a></li>
-                        </ul>
-                    </li>
-                    <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#eyewear" class="collapsed">
-                        <a href="#">Eyewear <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="eyewear">
-                            <li><a href="#">Eyewear Style 1</a></li>
-                            <li><a href="#">Eyewear Style 2</a></li>
-                            <li><a href="#">Eyewear Style 3</a></li>
-                        </ul>
-                    </li>
-                    <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#footwear" class="collapsed">
-                        <a href="#">Footwear <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="footwear">
-                            <li><a href="#">Footwear 1</a></li>
-                            <li><a href="#">Footwear 2</a></li>
-                            <li><a href="#">Footwear 3</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                </ul><%}%>
+                    
+            </div> 
         </div>
+                       
     </div>
 
     <div id="wrapper">
@@ -112,7 +101,7 @@
                                 <div class="header-cart-menu d-flex align-items-center ml-auto">
                                     <!-- Cart Area -->
                                     <div class="cart">
-                                        <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">2</span> <i class="ti-bag"></i> Your Bag $20</a>
+                                        <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">2</span> <i class="ti-bag"></i> Carrinho</a>
                                         <!-- Cart List Area Start -->
                                         <ul class="cart-list">
                                             <li>
@@ -154,13 +143,7 @@
                 <div class="container h-100">
                     <div class="row h-100">
                         <div class="col-12 d-md-flex justify-content-between">
-                            <!-- Header Social Area -->
-                            <div class="header-social-area">
-                                <a href="#"><span class="karl-level">Share</span> <i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
+                           
                             <!-- Menu Area -->
                             <div class="main-menu-area">
                                 <nav class="navbar navbar-expand-lg align-items-start">
@@ -171,17 +154,17 @@
                                         <ul class="navbar-nav animated" id="nav">
                                             <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
                                             <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                                <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Livros</a>
                                                 <div class="dropdown-menu" aria-labelledby="karlDropdown">
-                                                    <a class="dropdown-item" href="index.html">Home</a>
-                                                    <a class="dropdown-item" href="product-details.html">Todos</a>
+                                                    <a class="dropdown-item" href="index.html">Lançamentos</a>
                                                     <a class="dropdown-item" href="cart.html">Mais Vendidos</a>
+                                                    <a class="dropdown-item" href="product-details.html">Todos</a>
+                                                    
                                                     
                                                 </div>
                                             </li>
-                                            <li class="nav-item"><a class="nav-link" href="#">Livros</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="#"><span class="karl-level">hot</span> Shoes</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#"><span class="karl-level">hot</span> Autor</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="#">Editora</a></li>
                                         </ul>
                                     </div>
                                 </nav>
