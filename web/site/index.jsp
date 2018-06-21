@@ -110,13 +110,15 @@
                         <div class="product-img">
                             <img src="img/product-img/product-1.jpg" alt="">
                             <div class="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
+                                <a href="produtodetalhe.jsp" ><i class="ti-plus"></i></a>
                             </div>
                         </div>
                         <!-- Product Description -->
                         <div class="product-description">
-                            <h4 class="product-price">Preço</h4>
-                            <p>Descrição do produto</p>
+                            <h4 class="product-price"><%=livro.getPreco()%></h4>
+                            <h5>
+                            
+                                <p><%=livro.getSinopse()%></p>
                             <!-- Add to Cart -->
                             <a href="#" class="add-to-cart-btn">Adicionar ao carrinho</a>
                         </div>

@@ -49,40 +49,41 @@
             <div class="menu-list">
                 <h6>Categorias</h6>
                 <ul id="menu-content" class="menu-content collapse out">
-                    <!--  Side Nav  -->
-                <div class="nav-side-menu">
-                    <div class="menu-list">
-                
-                <ul id="menu-content" class="menu-content collapse out">
-                    <%
+                    <!-- Single Item -->
+                       <%
                     for(Categoria item : lista1){
                         
                     
                     %>
-                    <!-- Single Item -->
-                    <li data-toggle="collapse" data-target="#women" class="collapsed active">
-                        <a href="#"><%=item.getNome()%><span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="women">
-                             <%
-                    for(Livro item1 : listal){
+                    <li data-toggle="collapse" data-target="#<%=item.getNome()%>" class="collapsed ">
+                        <a href="#"><%=item.getNome()%> <span class="arrow"></span></a>
+                        <ul class="sub-menu collapse" id="<%=item.getNome()%>">
+                             
+                                 <%
+                    for(Livro l : item.getLivroList()){
                         
                     
                     %>
-                            <li><a href="#">Midi Dresses</a></li>
-                            <li><a href="#">Maxi Dresses</a></li>
-                            <li><a href="#">Prom Dresses</a></li>
-                            <li><a href="#">Little Black Dresses</a></li>
-                            <li><a href="#">Mini Dresses</a></li><%}%>
+                            <li><a href="#"><%=l.getNome()%></a></li>
+                            
+                            <%} %>
+                          
                         </ul>
                     </li>
-                </ul><%}%>
-                    
-            </div> 
-        </div>
-                       
-    </div>
+                  
+                         <%} %>
+                     
 
-    <div id="wrapper">
+
+
+
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+<div id="wrapper">
 
         <!-- ****** Header Area Start ****** -->
         <header class="header_area">
@@ -152,13 +153,13 @@
 
                                     <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
                                         <ul class="navbar-nav animated" id="nav">
-                                            <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                                            <li class="nav-item active"><a class="nav-link" href="index.jsp">Home</a></li>
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Livros</a>
                                                 <div class="dropdown-menu" aria-labelledby="karlDropdown">
                                                     <a class="dropdown-item" href="index.html">Lançamentos</a>
                                                     <a class="dropdown-item" href="cart.html">Mais Vendidos</a>
-                                                    <a class="dropdown-item" href="product-details.html">Todos</a>
+                                                    <a class="dropdown-item" href="produtodetalhe.jsp">Todos</a>
                                                     
                                                     
                                                 </div>
