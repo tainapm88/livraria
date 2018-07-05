@@ -3,15 +3,16 @@
   <persistence-unit name="LivrariaTempestadePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>modelo.Editora</class>
-    <class>modelo.Livro</class>
     <class>modelo.Autor</class>
+    <class>modelo.Livro</class>
+    <class>modelo.Compralivro</class>
+    <class>modelo.Cliente</class>
+    <class>modelo.Compra</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/livrariaTaina"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
-      
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      
       <property name="javax.persistence.jdbc.password" value="postgres"/>
       <!--
       <property name="javax.persistence.jdbc.password" value="pg-p@ss"/>

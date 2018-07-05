@@ -108,17 +108,18 @@
                     <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.2s">
                         <!-- Product Image -->
                         <div class="product-img">
-                            <img src="img/product-img/product-1.jpg" alt="">
+                            <img src="../arquivos/<%=livro.getImagem1()%>" id="img1" width="100" height="80"/>
                             <div class="product-quicview">
                                 <a href="produtodetalhe.jsp" ><i class="ti-plus"></i></a>
                             </div>
                         </div>
                         <!-- Product Description -->
                         <div class="product-description">
-                            <h4 class="product-price"><%=livro.getPreco()%></h4>
-                            <h5>
                             
-                                <p><%=livro.getSinopse()%></p>
+                            
+                                <p>Nome:<%=livro.getNome()%></p>
+                                <p>Preço:<%=livro.getPreco()%></p>
+                                
                             <!-- Add to Cart -->
                             <a href="#" class="add-to-cart-btn">Adicionar ao carrinho</a>
                         </div>

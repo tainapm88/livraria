@@ -9,21 +9,23 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,10 +33,17 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "livro")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Livro.findAll", query = "SELECT l FROM Livro l"),
-    @NamedQuery(name = "Livro.findFilter", query = "SELECT l FROM Livro l"
-    + " WHERE l.nome like :filtro")})
+    @NamedQuery(name = "Livro.findById", query = "SELECT l FROM Livro l WHERE l.id = :id"),
+    @NamedQuery(name = "Livro.findByDatapublicacao", query = "SELECT l FROM Livro l WHERE l.datapublicacao = :datapublicacao"),
+    @NamedQuery(name = "Livro.findByImagem1", query = "SELECT l FROM Livro l WHERE l.imagem1 = :imagem1"),
+    @NamedQuery(name = "Livro.findByImagem2", query = "SELECT l FROM Livro l WHERE l.imagem2 = :imagem2"),
+    @NamedQuery(name = "Livro.findByNome", query = "SELECT l FROM Livro l WHERE l.nome = :nome"),
+    @NamedQuery(name = "Livro.findByPreco", query = "SELECT l FROM Livro l WHERE l.preco = :preco"),
+    @NamedQuery(name = "Livro.findBySinopse", query = "SELECT l FROM Livro l WHERE l.sinopse = :sinopse"),
+    @NamedQuery(name = "Livro.findByImagem3", query = "SELECT l FROM Livro l WHERE l.imagem3 = :imagem3")})
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,8 +59,6 @@ public class Livro implements Serializable {
     private String imagem1;
     @Column(name = "imagem2")
     private String imagem2;
-    @Column(name = "imagem3")
-    private String imagem3;
     @Column(name = "nome")
     private String nome;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -59,10 +66,9 @@ public class Livro implements Serializable {
     private Double preco;
     @Column(name = "sinopse")
     private String sinopse;
-    @JoinTable(name = "autor_livro", joinColumns = {
-        @JoinColumn(name = "livro", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "autor", referencedColumnName = "id")})
-    @ManyToMany
+    @Column(name = "imagem3")
+    private String imagem3;
+    @ManyToMany(mappedBy = "livroList")
     private List<Autor> autorList;
     @JoinColumn(name = "categoria", referencedColumnName = "id")
     @ManyToOne
@@ -70,6 +76,8 @@ public class Livro implements Serializable {
     @JoinColumn(name = "editora", referencedColumnName = "cnpj")
     @ManyToOne
     private Editora editora;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro")
+    private List<Compralivro> compralivroList;
 
     public Livro() {
     }
@@ -110,14 +118,6 @@ public class Livro implements Serializable {
         this.imagem2 = imagem2;
     }
 
-    public String getImagem3() {
-        return imagem3;
-    }
-
-    public void setImagem3(String imagem3) {
-        this.imagem3 = imagem3;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -142,6 +142,15 @@ public class Livro implements Serializable {
         this.sinopse = sinopse;
     }
 
+    public String getImagem3() {
+        return imagem3;
+    }
+
+    public void setImagem3(String imagem3) {
+        this.imagem3 = imagem3;
+    }
+
+    @XmlTransient
     public List<Autor> getAutorList() {
         return autorList;
     }
@@ -164,6 +173,15 @@ public class Livro implements Serializable {
 
     public void setEditora(Editora editora) {
         this.editora = editora;
+    }
+
+    @XmlTransient
+    public List<Compralivro> getCompralivroList() {
+        return compralivroList;
+    }
+
+    public void setCompralivroList(List<Compralivro> compralivroList) {
+        this.compralivroList = compralivroList;
     }
 
     @Override

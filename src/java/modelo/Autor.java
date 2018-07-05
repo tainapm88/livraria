@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+
 /**
  *
  * @author Aluno
@@ -31,6 +32,12 @@ import javax.persistence.Table;
     @NamedQuery(name = "Autor.findFilter", query = "SELECT a FROM Autor a"
     + " WHERE a.nome like :filtro")})
 public class Autor implements Serializable {
+
+    @JoinTable(name = "autor_livro", joinColumns = {
+        @JoinColumn(name = "autor", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "livro", referencedColumnName = "id")})
+    @ManyToMany
+    private List<Livro> livroList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,8 +54,7 @@ public class Autor implements Serializable {
     @Column(name = "sexo")
     private Character sexo;
     
-    @ManyToMany(mappedBy = "autorList")
-    private List<Livro> livroList;
+   
 
     public Autor() {
     }
@@ -129,5 +135,7 @@ public class Autor implements Serializable {
     public String toString() {
         return "modelo.Autor[ id=" + id + " ]";
     }
+
+    
     
 }
