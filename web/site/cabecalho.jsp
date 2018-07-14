@@ -7,13 +7,13 @@
 <html lang="en">
     
     <%
-    CategoriaDAO daoc = new CategoriaDAO();
-    List<Categoria> lista1 = daoc.listar();
-    daoc.fecharConexao();
+    CategoriaDAO daoc1 = new CategoriaDAO();
+    List<Categoria> lista1 = daoc1.listar();
+    
     
     LivroDAO daol = new LivroDAO();
     List<Livro> listal = daol.listar();
-    daoc.fecharConexao();
+    daoc1.fecharConexao();
     %>
 
 <head>
@@ -123,7 +123,7 @@
                                             </li>
                                             <li class="total">
                                                 <span class="pull-right">Total: $20.00</span>
-                                                <a href="cart.html" class="btn btn-sm btn-cart">Cart</a>
+                                                <a href="carrinho.jsp" class="btn btn-sm btn-cart">Cart</a>
                                                 <a href="checkout-1.html" class="btn btn-sm btn-checkout">Checkout</a>
                                             </li>
                                         </ul>

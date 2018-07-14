@@ -9,49 +9,6 @@
     List<Livro> listap = daop.listar();
     daop.fecharConexao();
 %>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title  -->
-    <title>Karl - Fashion Ecommerce Template | Product Details</title>
-
-    <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico">
-
-    <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Responsive CSS -->
-    <link href="css/responsive.css" rel="stylesheet">
-
-</head>
-
-<body>
-    <div class="catagories-side-menu">
-        <!-- Close Icon -->
-        <div id="sideMenuClose">
-            <i class="ti-close"></i>
-        </div>
-        <!--  Side Nav  -->
-        <div class="nav-side-menu">
-            <div class="menu-list">
-                <h6>Categories</h6>
-               
-            </div>
-        </div>
-    </div>
-
-    <div id="wrapper">
-
-<%@include file="cabecalho.jsp" %>
 
         <!-- <<<<<<<<<<<<<<<<<<<< Breadcumb Area Start <<<<<<<<<<<<<<<<<<<< -->
         <div class="breadcumb_area">
